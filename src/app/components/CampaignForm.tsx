@@ -57,6 +57,26 @@ export default function CampaignForm() {
     document.body.removeChild(link);
   };
 
+  const handleShare = async () => {
+    try {
+      const response = await fetch("/images/voucher.jpg");
+      const blob = await response.blob();
+      const file = new File([blob], "AMAC_VOUCHER.jpg", { type: "image/jpeg" });
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: "AMAC Exclusive Voucher",
+          text: "Voucher đặc quyền từ AMAC Collective",
+        });
+      } else {
+        handleDownload();
+      }
+    } catch (error) {
+      handleDownload();
+    }
+  };
+
   if (state === "SUCCESS") {
     return (
       <div className="animate-luxury-slide flex flex-col items-center text-center w-full">
@@ -76,16 +96,20 @@ export default function CampaignForm() {
         <div className="flex flex-col gap-6 items-center w-full">
           <button 
             type="button"
-            onClick={handleDownload} 
+            onClick={handleShare} 
             className="editorial-cta w-full justify-center cursor-pointer border-none outline-none"
           >
-            LƯU VOUCHER VỀ MÁY
+            LƯU / CHIA SẺ VOUCHER
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/>
             </svg>
           </button>
           
-          <a suppressHydrationWarning href="tel:0901234567" className="font-header font-extrabold text-sm tracking-widest text-black uppercase transition-colors hover:text-primary no-underline border-none">
+          <p className="text-[10px] tracking-widest text-gray-400 font-bold uppercase animate-pulse">
+            ↑ NHẤN GIỮ ẢNH ĐỂ LƯU THỦ CÔNG ↑
+          </p>
+          
+          <a suppressHydrationWarning href="tel:0901234567" className="mt-4 font-header font-extrabold text-sm tracking-widest text-black uppercase transition-colors hover:text-primary no-underline border-none">
             LIÊN HỆ ĐẶT HÀNG NGAY →
           </a>
         </div>
