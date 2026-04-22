@@ -1,0 +1,147 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+
+type State = "FORM" | "SUBMITTING" | "SUCCESS" | "ERROR";
+
+export default function CampaignForm() {
+  const [mounted, setMounted] = useState(false);
+  const [state, setState] = useState<State>("FORM");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
+  const handleAction = async () => {
+    if (!name || !phone) {
+      setErrorMessage("VUI LÒNG NHẬP ĐẦY ĐỦ THÔNG TIN.");
+      setState("ERROR");
+      return;
+    }
+
+    setState("SUBMITTING");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, phone }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setState("SUCCESS");
+      } else {
+        setErrorMessage(data.message || "XÁC NHẬN THẤT BẠI. VUI LÒNG THỬ LẠI.");
+        setState("ERROR");
+      }
+    } catch (error) {
+      setErrorMessage("LỖI KẾT NỐI MÁY CHỦ.");
+      setState("ERROR");
+    }
+  };
+
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.href = "/images/voucher.jpg";
+    link.download = "AMAC_EXCLUSIVE_VOUCHER.jpg";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  if (state === "SUCCESS") {
+    return (
+      <div className="animate-luxury-slide flex flex-col items-center text-center w-full">
+        <h2 className="luxury-heading text-2xl mb-2 text-black leading-tight">XÁC NHẬN THÀNH CÔNG</h2>
+        <p className="font-header text-sm tracking-luxury text-gray-500 mb-10 uppercase">
+          VOUCHER ĐẶC QUYỀN CỦA BẠN ĐÃ SẴN SÀNG
+        </p>
+        
+        <div className="border border-black p-5 bg-white mb-10 w-full max-w-2xl ring-1 ring-black/5 overflow-hidden">
+          <img 
+            src="/images/voucher.jpg" 
+            alt="AMAC VOUCHER" 
+            className="w-full h-auto block shadow-2xl"
+          />
+        </div>
+
+        <div className="flex flex-col gap-6 items-center w-full">
+          <button 
+            type="button"
+            onClick={handleDownload} 
+            className="editorial-cta w-full justify-center cursor-pointer border-none outline-none"
+          >
+            LƯU VOUCHER VỀ MÁY
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+            </svg>
+          </button>
+          
+          <a suppressHydrationWarning href="tel:0901234567" className="font-header font-extrabold text-sm tracking-widest text-black uppercase transition-colors hover:text-primary no-underline border-none">
+            LIÊN HỆ ĐẶT HÀNG NGAY →
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="animate-luxury-slide border border-black p-5 md:p-14 bg-white relative shadow-xl w-full">
+      <div className="mb-12 border-b border-black pb-6">
+        <h2 className="luxury-heading text-xl text-black mb-1">NHẬP THÔNG TIN CỦA BẠN</h2>
+        <p className="text-[10px] tracking-[0.2em] font-extrabold text-gray-400">NHẬN NGAY ƯU ĐÃI ĐẶC QUYỀN TỪ AMAC</p>
+      </div>
+
+      <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-3">
+          <label htmlFor="name" className="field-label">HỌ VÀ TÊN</label>
+          <input
+            type="text"
+            id="name"
+            autoComplete="name"
+            placeholder="NHẬP TÊN CỦA BẠN"
+            className="field-input"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+
+        <div className="flex flex-col gap-3">
+          <label htmlFor="phone" className="field-label">SỐ ĐIỆN THOẠI</label>
+          <input
+            type="tel"
+            id="phone"
+            autoComplete="tel"
+            placeholder="+84 000 000 000"
+            className="field-input"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+        </div>
+
+        {state === "ERROR" && (
+          <div className="font-header text-red-600 text-[12px] font-bold tracking-tight text-center">
+            {errorMessage}
+          </div>
+        )}
+
+        <button 
+          type="button"
+          onClick={handleAction}
+          className="editorial-cta w-full justify-center mt-2 cursor-pointer border-none" 
+          disabled={state === "SUBMITTING"}
+        >
+          {state === "SUBMITTING" ? "ĐANG XỬ LÝ..." : "NHẬN VOUCHER NGAY"}
+        </button>
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #65C225;
+  --color-primary-muted: rgba(101, 194, 37, 0.1);
+  --color-luxury-border: #e5e5e5;
+  
+  --font-header: var(--font-be-vietnam), sans-serif;
+  --font-jakarta: var(--font-plus-jakarta), sans-serif;
+  
+  --tracking-luxury: 0.2em;
+}
+
+@layer base {
+  body {
+    @apply bg-[#FAFAF9] text-black antialiased font-jakarta selection:bg-primary selection:text-white;
+  }
+}
+
+@layer components {
+  .luxury-heading {
+    @apply font-header uppercase font-black tracking-tight leading-none;
+  }
+  
+  .editorial-cta {
+    @apply bg-primary px-12 py-6 font-header font-extrabold text-[14px] uppercase tracking-luxury text-white transition-all duration-500 ease-out flex items-center gap-3 hover:-translate-y-1 hover:shadow-[0_10px_40px_rgba(101,194,37,0.3)] disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .field-input {
+    @apply w-full border-b-2 border-luxury-border py-4 font-jakarta text-base text-black outline-none transition-colors duration-300 bg-transparent focus:border-black;
+  }
+
+  .field-label {
+    @apply text-[11px] font-extrabold tracking-luxury text-black uppercase;
+  }
+  
+  .animate-luxury-slide {
+    @apply opacity-0 translate-y-10 animate-[slideUp_1.2s_cubic-bezier(0.19,1,0.22,1)_forwards];
+  }
+
+  .luxury-card {
+    @apply bg-white border border-black/5 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] transition-all duration-700 hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)];
+  }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
