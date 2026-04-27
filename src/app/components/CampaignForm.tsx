@@ -54,7 +54,11 @@ export default function CampaignForm() {
     link.download = "AMAC_EXCLUSIVE_VOUCHER.jpg";
     document.body.appendChild(link);
     link.click();
-    document.body.removeChild(link);
+    
+    // Safety check: ensure the link is still attached before removing
+    if (link.parentNode === document.body) {
+      document.body.removeChild(link);
+    }
   };
 
   const handleShare = async () => {
@@ -80,36 +84,51 @@ export default function CampaignForm() {
   if (state === "SUCCESS") {
     return (
       <div className="animate-luxury-slide flex flex-col items-center text-center w-full">
-        <h2 className="luxury-heading text-2xl mb-2 text-black leading-tight">XÁC NHẬN THÀNH CÔNG</h2>
+        <h2 className="luxury-heading text-2xl mb-2 text-black leading-tight">
+          XÁC NHẬN THÀNH CÔNG
+        </h2>
         <p className="font-header text-sm tracking-luxury text-gray-500 mb-10 uppercase">
           VOUCHER ĐẶC QUYỀN CỦA BẠN ĐÃ SẴN SÀNG
         </p>
-        
+
         <div className="border border-black p-5 bg-white mb-10 w-full max-w-2xl ring-1 ring-black/5 overflow-hidden">
-          <img 
-            src="/images/voucher.jpg" 
-            alt="AMAC VOUCHER" 
+          <img
+            src="/images/voucher.jpg"
+            alt="AMAC VOUCHER"
             className="w-full h-auto block shadow-2xl"
           />
         </div>
 
         <div className="flex flex-col gap-6 items-center w-full">
-          <button 
+          <button
             type="button"
-            onClick={handleShare} 
+            onClick={handleShare}
             className="editorial-cta w-full justify-center cursor-pointer border-none outline-none"
           >
             LƯU / CHIA SẺ VOUCHER
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="3"
+            >
+              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13" />
             </svg>
           </button>
-          
+
           <p className="text-[10px] tracking-widest text-gray-400 font-bold uppercase animate-pulse">
             ↑ NHẤN GIỮ ẢNH ĐỂ LƯU THỦ CÔNG ↑
           </p>
-          
-          <a suppressHydrationWarning href="tel:0901234567" className="mt-4 font-header font-extrabold text-sm tracking-widest text-black uppercase transition-colors hover:text-primary no-underline border-none">
+
+          <a
+            suppressHydrationWarning
+            href="https://zalo.me/0969783553"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 font-header font-extrabold text-sm tracking-widest text-black uppercase transition-colors hover:text-primary no-underline border-none"
+          >
             LIÊN HỆ ĐẶT HÀNG NGAY →
           </a>
         </div>
@@ -120,13 +139,19 @@ export default function CampaignForm() {
   return (
     <div className="animate-luxury-slide border border-black p-5 md:p-14 bg-white relative shadow-xl w-full">
       <div className="mb-12 border-b border-black pb-6">
-        <h2 className="luxury-heading text-xl text-black mb-1">NHẬP THÔNG TIN CỦA BẠN</h2>
-        <p className="text-[10px] tracking-[0.2em] font-extrabold text-gray-400">NHẬN NGAY ƯU ĐÃI ĐẶC QUYỀN TỪ AMAC</p>
+        <h2 className="luxury-heading text-xl text-black mb-1">
+          NHẬP THÔNG TIN CỦA BẠN
+        </h2>
+        <p className="text-[10px] tracking-[0.2em] font-extrabold text-gray-400">
+          NHẬN NGAY ƯU ĐÃI ĐẶC QUYỀN TỪ AMAC
+        </p>
       </div>
 
       <div className="flex flex-col gap-8">
         <div className="flex flex-col gap-3">
-          <label htmlFor="name" className="field-label">HỌ VÀ TÊN</label>
+          <label htmlFor="name" className="field-label">
+            HỌ VÀ TÊN
+          </label>
           <input
             type="text"
             id="name"
@@ -139,7 +164,9 @@ export default function CampaignForm() {
         </div>
 
         <div className="flex flex-col gap-3">
-          <label htmlFor="phone" className="field-label">SỐ ĐIỆN THOẠI</label>
+          <label htmlFor="phone" className="field-label">
+            SỐ ĐIỆN THOẠI
+          </label>
           <input
             type="tel"
             id="phone"
@@ -157,10 +184,10 @@ export default function CampaignForm() {
           </div>
         )}
 
-        <button 
+        <button
           type="button"
           onClick={handleAction}
-          className="editorial-cta w-full justify-center mt-2 cursor-pointer border-none" 
+          className="editorial-cta w-full justify-center mt-2 cursor-pointer border-none"
           disabled={state === "SUBMITTING"}
         >
           {state === "SUBMITTING" ? "ĐANG XỬ LÝ..." : "NHẬN VOUCHER NGAY"}

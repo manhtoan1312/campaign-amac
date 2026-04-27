@@ -5,15 +5,16 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#FAFAF9] text-black selection:bg-primary selection:text-white pb-20">
       {/* Premium Navigation / Logo Bar */}
-      <nav className="max-w-[1400px] mx-auto px-6 py-10 flex justify-center md:justify-start items-center animate-luxury-slide">
+      <nav className="max-w-[1400px] mx-auto px-6 flex justify-center md:justify-start items-center animate-luxury-slide">
         <div className="flex flex-col items-center md:items-start group cursor-default">
-          <span className="font-header font-black text-2xl md:text-3xl tracking-[-0.05em] leading-none mb-1">
-            AMAC<span className="text-primary italic">.</span>COLLECTIVE
-          </span>
-          <div className="h-[2px] w-0 bg-primary transition-all duration-700 group-hover:w-full"></div>
-          <span className="text-[8px] tracking-[0.5em] font-bold text-gray-400 uppercase mt-1">
-            EST. 2026 — EXCLUSIVE REWARDS
-          </span>
+          <Image
+            src="/logo.png"
+            alt="AMAC Aesthetic"
+            width={100}
+            height={100}
+            className="object-cover contrast-[1.1] grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out"
+            priority
+          />
         </div>
       </nav>
 
@@ -21,8 +22,12 @@ export default function Home() {
         {/* Hero Section - Simplified and Premium */}
         <section className="mb-2 md:mb-20 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-8 md:gap-16">
           <div className="animate-luxury-slide">
-            <h1 suppressHydrationWarning className="luxury-heading text-2xl md:text-6xl lg:text-7xl xl:text-[80px] text-black">
-              NHẬN <span className="text-primary italic">VOUCHER</span> <br className="hidden md:block" />
+            <h1
+              suppressHydrationWarning
+              className="luxury-heading text-2xl md:text-6xl lg:text-7xl xl:text-[80px] text-black"
+            >
+              NHẬN <span className="text-primary italic">VOUCHER</span>{" "}
+              <br className="hidden md:block" />
               TỪ AMAC
             </h1>
           </div>
@@ -30,7 +35,6 @@ export default function Home() {
 
         {/* Content Canvas */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-20 items-start">
-          
           {/* Left: Brand Imagery & Info */}
           <div className="lg:col-span-5 hidden lg:block animate-luxury-slide delay-300">
             <div className="relative border border-black p-2 bg-white">
@@ -39,6 +43,7 @@ export default function Home() {
                   src="/hero.png"
                   alt="AMAC Aesthetic"
                   fill
+                  sizes="(max-width: 1024px) 100vw, 500px"
                   className="object-cover contrast-[1.1] grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out"
                   priority
                 />
@@ -47,7 +52,8 @@ export default function Home() {
             <div className="mt-8 space-y-6">
               <div className="h-px w-20 bg-black"></div>
               <p className="font-header text-sm font-medium tracking-tight uppercase leading-relaxed max-w-[300px]">
-                Hệ sinh thái đặc quyền dành riêng cho khách hàng cao cấp của AMAC.
+                Hệ sinh thái đặc quyền dành riêng cho khách hàng cao cấp của
+                AMAC.
               </p>
             </div>
           </div>
@@ -60,7 +66,9 @@ export default function Home() {
 
             {/* Terms Card - Refined */}
             <div className="mt-12 p-8 md:p-12 border border-black/5 bg-white/50 backdrop-blur-sm">
-              <h3 className="font-header font-black text-[12px] mb-6 uppercase tracking-[0.3em] text-primary">Điều kiện áp dụng</h3>
+              <h3 className="font-header font-black text-[12px] mb-6 uppercase tracking-[0.3em] text-primary">
+                Điều kiện áp dụng
+              </h3>
               <div className="space-y-4 font-jakarta text-[11px] md:text-[12px] text-gray-500 font-bold uppercase tracking-wide">
                 <div className="flex gap-4 items-start">
                   <span className="text-primary">01.</span>
@@ -82,7 +90,9 @@ export default function Home() {
 
       {/* Modern Footer */}
       <footer className="mt-20 border-t border-black/5 py-16 px-6 max-w-[1240px] mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-        <div className="font-header font-black text-lg tracking-tighter italic">AMAC.COLLECTIVE</div>
+        <div className="font-header font-black text-lg tracking-tighter italic">
+          AMAC.COLLECTIVE
+        </div>
         <div className="text-[10px] tracking-[0.3em] text-gray-400 font-bold uppercase">
           © THE ART OF EXCLUSIVITY • 2026
         </div>
