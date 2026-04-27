@@ -41,6 +41,28 @@
   .luxury-card {
     @apply bg-white border border-black/5 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] transition-all duration-700 hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)];
   }
+
+  .btn-contact-premium {
+    @apply bg-black px-12 py-7 font-header font-extrabold text-[15px] uppercase tracking-[0.3em] text-white transition-all duration-700 ease-in-out flex items-center justify-center gap-4 hover:bg-primary hover:-translate-y-2 hover:shadow-[0_25px_60px_rgba(101,194,37,0.5)] no-underline relative overflow-hidden;
+  }
+
+  .shimmer-overlay {
+    @apply absolute inset-0 -translate-x-[100%] rotate-[35deg] bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 ease-in-out;
+  }
+
+  .btn-contact-premium:hover .shimmer-overlay {
+    @apply translate-x-[100%];
+  }
+
+  .auto-shimmer {
+    @apply absolute inset-0 -translate-x-[100%] rotate-[35deg] bg-gradient-to-r from-transparent via-white/10 to-transparent animate-[shimmer_3s_infinite_linear];
+  }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-150%) rotate(35deg); }
+  50% { transform: translateX(150%) rotate(35deg); }
+  100% { transform: translateX(150%) rotate(35deg); }
 }
 
 @keyframes slideUp {

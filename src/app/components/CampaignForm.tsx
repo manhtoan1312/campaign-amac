@@ -54,7 +54,7 @@ export default function CampaignForm() {
     link.download = "AMAC_EXCLUSIVE_VOUCHER.jpg";
     document.body.appendChild(link);
     link.click();
-    
+
     // Safety check: ensure the link is still attached before removing
     if (link.parentNode === document.body) {
       document.body.removeChild(link);
@@ -88,7 +88,7 @@ export default function CampaignForm() {
           XÁC NHẬN THÀNH CÔNG
         </h2>
         <p className="font-header text-sm tracking-luxury text-gray-500 mb-10 uppercase">
-          VOUCHER ĐẶC QUYỀN CỦA BẠN ĐÃ SẴN SÀNG
+          VOUCHER CỦA BẠN ĐÃ SẴN SÀNG
         </p>
 
         <div className="border border-black p-5 bg-white mb-10 w-full max-w-2xl ring-1 ring-black/5 overflow-hidden">
@@ -118,18 +118,29 @@ export default function CampaignForm() {
             </svg>
           </button>
 
-          <p className="text-[10px] tracking-widest text-gray-400 font-bold uppercase animate-pulse">
-            ↑ NHẤN GIỮ ẢNH ĐỂ LƯU THỦ CÔNG ↑
-          </p>
-
           <a
             suppressHydrationWarning
             href="https://zalo.me/0969783553"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 font-header font-extrabold text-sm tracking-widest text-black uppercase transition-colors hover:text-primary no-underline border-none"
+            className="btn-contact-premium mt-8 w-full group"
           >
-            LIÊN HỆ ĐẶT HÀNG NGAY →
+            <div className="shimmer-overlay"></div>
+            <div className="auto-shimmer"></div>
+            <span className="relative z-10 flex items-center gap-3">
+              LIÊN HỆ ĐẶT HÀNG NGAY
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                className="transition-transform duration-500 group-hover:translate-x-2"
+              >
+                <path d="M5 12h14m-7-7 7 7-7 7" />
+              </svg>
+            </span>
           </a>
         </div>
       </div>
